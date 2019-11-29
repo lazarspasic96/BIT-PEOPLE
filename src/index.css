@@ -22,4 +22,11 @@ code {
 main {
   flex: 1 0 auto;
 }
+
+
+.brand-logo {
+  text-align: center;
+  margin-left: 42%;
+
+}
     

@@ -1,6 +1,7 @@
 import React from 'react';
 import UsersList from "./UsersList";
-import { fetchUsers } from '../../services/UserServices'
+import { fetchUsers } from '../../services/UserServices';
+import Grid from './Grid'
 
 class UsersPage extends React.Component {
     constructor(props) {
@@ -8,31 +9,27 @@ class UsersPage extends React.Component {
 
         this.state = {
             users: []
+
         };
     }
 
-    loadUsers() {
+    componentDidMount() {
         fetchUsers().then((users) => { this.setState({ users: users }) })
     }
 
-
-
     render() {
-        return (
-            <>
-                <button onClick={(event) => {
-                    return this.loadUsers()
 
-                }
+        if (this.props.isGrid) {
+            return <Grid users={this.state.users} />
+        }
 
+        return <UsersList users={this.state.users} />
 
-                }>Reload</button>
-                <UsersList users={this.state.users} />
-            </>
-        )
     }
 }
 
 
 
 export default UsersPage;
+
+

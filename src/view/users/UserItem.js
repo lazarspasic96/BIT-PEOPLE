@@ -9,7 +9,7 @@ const UserItem = (props) => {
                 <img src={props.user.image} alt="" className="circle" />
                 <span className="title">{props.user.name}</span>
 
-                <p><i className="tiny material-icons">email</i>{props.user.email}<br />
+                <p><i className="tiny material-icons">email</i>{(props.user.protectEmail())}<br />
                     <i className="tiny material-icons">cake</i>{props.user.dob}</p>
 
             </li>

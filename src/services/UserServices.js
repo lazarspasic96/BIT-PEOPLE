@@ -1,4 +1,4 @@
-import User from '../view/entities/User'
+import User from '../entities/User'
 
 
 
