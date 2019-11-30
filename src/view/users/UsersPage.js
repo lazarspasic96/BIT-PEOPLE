@@ -13,7 +13,7 @@ class UsersPage extends React.Component {
         this.state = {
             isGrid: false,
             users: [],
-            query: ''
+            query: '',
         };
     }
 
@@ -25,10 +25,10 @@ class UsersPage extends React.Component {
     changeLayout = () => {
         this.setState(prevState => {
 
+
             return {
 
                 isGrid: !prevState.isGrid
-
             }
         })
     }
@@ -46,8 +46,6 @@ class UsersPage extends React.Component {
 
 
 
-
-
     render() {
         const filteredUsers = this.state.users.filter(user => user
             .getName()
@@ -57,7 +55,10 @@ class UsersPage extends React.Component {
             return <>
                 <div className="row">
                     <Search onSearch={this.onSearch} />
+
                     <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} isGrid={this.state.isGrid} />
+
+
                 </div>
                 <Grid users={filteredUsers} />
             </>
@@ -66,7 +67,9 @@ class UsersPage extends React.Component {
         return <>
             <div className="row">
                 <Search onSearch={this.onSearch} />
+
                 <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} isGrid={this.state.isGrid} />
+
 
             </div>
 

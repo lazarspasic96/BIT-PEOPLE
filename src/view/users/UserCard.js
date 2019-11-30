@@ -2,6 +2,7 @@ import React from 'react'
 import Grid from './Grid';
 
 const UserCard = (props) => {
+
     const gender = props.user.gender
 
 
@@ -13,6 +14,7 @@ const UserCard = (props) => {
                     <img src={props.user.image1} />
                     <span className="card-title">{props.user.name}</span>
 
+
                 </div>
                 <span>{props.user.protectEmail()}</span> <br />
 
@@ -20,17 +22,9 @@ const UserCard = (props) => {
 
 
             </div>
-        </div >
 
-
-
+        </div>
     )
-
 }
-
-
-
-
-
 
 export default UserCard; 

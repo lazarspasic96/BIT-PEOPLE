@@ -14,6 +14,11 @@ class User {
 
     }
 
+    getName() {
+        return this.name.toLowerCase();
+
+    }
+
 
     protectEmail = function () {
         let avg, splitted, part1, part2;
