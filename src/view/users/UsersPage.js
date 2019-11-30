@@ -2,29 +2,71 @@ import React from 'react';
 import UsersList from "./UsersList";
 import { fetchUsers } from '../../services/UserServices';
 import Grid from './Grid'
+import ActionButtons from './ActionButtons'
+import Search from './Search'
+
 
 class UsersPage extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            users: []
-
+            isGrid: false,
+            users: [],
+            query: '',
         };
     }
+
+    onSearch = (val) => {
+        this.setState({ query: val })
+
+    }
+
+    changeLayout = () => {
+        this.setState(prevState => {
+            return {
+                isGrid: !prevState.isGrid
+            }
+        })
+    }
+
+
 
     componentDidMount() {
         fetchUsers().then((users) => { this.setState({ users: users }) })
     }
 
-    render() {
+    refresh = () => {
+        return (fetchUsers().then((users) => { this.setState({ users: users }) }))
 
-        if (this.props.isGrid) {
-            return <Grid users={this.state.users} />
+    }
+
+
+
+    render() {
+        const filteredUsers = this.state.users.filter(user => user
+            .getName()
+            .includes(this.state.query.toLowerCase()))
+
+        if (this.state.isGrid) {
+            return <>
+                <div className="row">
+                    <Search onSearch={this.onSearch} />
+                    <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} />
+                </div>
+                <Grid users={filteredUsers} />
+            </>
         }
 
-        return <UsersList users={this.state.users} />
+        return <>
+            <div className="row">
+                <Search onSearch={this.onSearch} />
+                <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} />
 
+            </div>
+
+            <UsersList users={filteredUsers} />
+        </>
     }
 }
 

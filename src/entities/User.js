@@ -9,6 +9,11 @@ class User {
         this.image1 = userData.picture.large;
     }
 
+    getName() {
+        return this.name.toLowerCase();
+
+    }
+
 
     protectEmail = function () {
         let avg, splitted, part1, part2;

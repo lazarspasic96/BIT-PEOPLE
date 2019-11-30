@@ -29,4 +29,13 @@ main {
   margin-left: 42%;
 
 }
+
+ul {
+  list-style-type: none;
+
+}
+
+.buttons {
+  text-align: right;
+}
     
