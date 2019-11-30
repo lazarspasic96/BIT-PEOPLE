@@ -2,10 +2,12 @@ import React from 'react';
 
 const UserItem = (props) => {
 
+    const gender = props.user.gender
+
     return (
         <>
             <ul className="collection">
-                <li className="collection-item avatar">
+                <li className={`collection-item avatar ${gender}`}>
                     <img src={props.user.image} alt="" className="circle" />
                     <span className="title">{props.user.name}</span>
 

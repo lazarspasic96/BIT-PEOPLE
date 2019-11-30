@@ -3,10 +3,10 @@ class User {
         this.id = userData.login.uuid;
         this.name = `${userData.name.first} ${userData.name.last}`;
         this.dob = new Date(userData.dob.date).toJSON().slice(0, 10).split('-').reverse().join('.');
-
         this.email = userData.email;
         this.image = userData.picture.medium;
         this.image1 = userData.picture.large;
+        this.gender = userData.gender;
     }
 
     getName() {

@@ -23,8 +23,8 @@ class UsersPage extends React.Component {
     }
 
     changeLayout = () => {
-        this.buttonView()
         this.setState(prevState => {
+
             return {
 
                 isGrid: !prevState.isGrid
@@ -42,14 +42,6 @@ class UsersPage extends React.Component {
     refresh = () => {
         return (fetchUsers().then((users) => { this.setState({ users: users }) }))
 
-    }
-
-    buttonView = () => {
-        this.setState(prevState => {
-            return {
-                buttonView: !prevState.buttonView
-            }
-        })
     }
 
 

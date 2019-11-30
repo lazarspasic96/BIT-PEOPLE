@@ -38,4 +38,11 @@ ul {
 .buttons {
   text-align: right;
 }
-    
+
+.collection-item.female {
+  background-color: red; 
+}
+
+ .female {
+  background-color: red;
+}
