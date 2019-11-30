@@ -13,7 +13,7 @@ class UsersPage extends React.Component {
         this.state = {
             isGrid: false,
             users: [],
-            query: '',
+            query: ''
         };
     }
 
@@ -23,9 +23,12 @@ class UsersPage extends React.Component {
     }
 
     changeLayout = () => {
+        this.buttonView()
         this.setState(prevState => {
             return {
+
                 isGrid: !prevState.isGrid
+
             }
         })
     }
@@ -41,6 +44,16 @@ class UsersPage extends React.Component {
 
     }
 
+    buttonView = () => {
+        this.setState(prevState => {
+            return {
+                buttonView: !prevState.buttonView
+            }
+        })
+    }
+
+
+
 
 
     render() {
@@ -52,7 +65,7 @@ class UsersPage extends React.Component {
             return <>
                 <div className="row">
                     <Search onSearch={this.onSearch} />
-                    <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} />
+                    <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} isGrid={this.state.isGrid} />
                 </div>
                 <Grid users={filteredUsers} />
             </>
@@ -61,7 +74,7 @@ class UsersPage extends React.Component {
         return <>
             <div className="row">
                 <Search onSearch={this.onSearch} />
-                <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} />
+                <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} isGrid={this.state.isGrid} />
 
             </div>
 
