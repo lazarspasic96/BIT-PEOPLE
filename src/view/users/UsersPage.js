@@ -1,12 +1,12 @@
 import React from 'react';
 import UsersList from "./UsersList";
-import { fetchUsers } from '../../services/UserServices';
+import { fetchUsers, fetchCachedUsers } from '../../services/UserServices';
 import Grid from './Grid'
 import ActionButtons from './ActionButtons'
 import Search from './Search'
 import { LoadingScreen } from "./LoadingScreen"
 import NoMatch from './NoMatch';
-
+import TimeAgo from 'react-timeago'
 
 class UsersPage extends React.Component {
     constructor(props) {
@@ -29,9 +29,7 @@ class UsersPage extends React.Component {
 
         this.setState(prevState => {
             return {
-
                 isGrid: !prevState.isGrid
-
             }
         })
 
@@ -41,6 +39,7 @@ class UsersPage extends React.Component {
 
     componentDidMount() {
 
+
         if (localStorage.getItem('isGrid')) {
             let isGrid = JSON.parse(localStorage.getItem('isGrid'));
             console.log(isGrid);
@@ -48,15 +47,17 @@ class UsersPage extends React.Component {
                 isGrid: isGrid
             });
         }
-        fetchUsers().then((users) => { this.setState({ isLoading: false, users: users }) });
 
-
+        fetchCachedUsers()
+            .then(users => this.setState({ isLoading: false, users: users }));
     }
 
     refresh = () => {
-        this.setState({ isLoading: true });
-        return (fetchUsers().then((users) => { this.setState({ isLoading: false, users: users }) }))
 
+        this.setState({ isLoading: true });
+
+        return fetchUsers()
+            .then(users => this.setState({ isLoading: false, users }))
     }
 
 
@@ -65,7 +66,6 @@ class UsersPage extends React.Component {
 
 
         if (this.state.isLoading) {
-            console.log("loading data");
             return <LoadingScreen />
         }
 
@@ -85,8 +85,6 @@ class UsersPage extends React.Component {
                 <div className="row">
                     <Search onSearch={this.onSearch} />
                     <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} isGrid={this.state.isGrid} />
-
-
                 </div>
                 <NoMatch />
             </>
@@ -102,6 +100,7 @@ class UsersPage extends React.Component {
                     <p>{`Male: ${maleSearch} Female: ${femaleSearch}`}</p>
                 </div>
                 <Grid users={filteredUsers} />
+                <p>   {<TimeAgo date={new Date(JSON.parse(localStorage.getItem("time")))} />}</p>
             </>
         }
 
@@ -110,11 +109,14 @@ class UsersPage extends React.Component {
                 <Search onSearch={this.onSearch} />
                 <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} isGrid={this.state.isGrid} />
                 <p>{`Male: ${maleSearch} Female: ${femaleSearch}`}</p>
-
             </div>
 
             <UsersList users={filteredUsers} />
+            <p>   {<TimeAgo date={new Date(JSON.parse(localStorage.getItem("time")))} />}</p>
+
         </>
+
+
     }
 
 }

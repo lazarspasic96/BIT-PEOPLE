@@ -1,24 +1,26 @@
 import User from '../entities/User'
 
+// fetchUsers()
 
+const fetchCachedUsers = () => {
+    const cachedApiUsers = JSON.parse(localStorage.getItem('apiUsers'));
 
-const fetchUsers = () => {
-    const url = 'https://randomuser.me/api/?results=15'
+    if (cachedApiUsers && cachedApiUsers.length) {
+        return Promise.resolve(cachedApiUsers.map(apiUser => new User(apiUser)));
+    }
 
-    return fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            const myUsers = data.results.map((userData) => {
-                return new User(userData);
-            })
-
-            return myUsers;
-        })
-
+    return fetchUsers();
 }
 
-export { fetchUsers }
+const fetchUsers = () => {
+    return fetch('https://randomuser.me/api/?results=15')
+        .then(response => response.json())
+        .then(data => {
+            localStorage.setItem("time", JSON.stringify(new Date().getTime()));
+            localStorage.setItem("apiUsers", JSON.stringify(data.results))
 
+            return data.results.map(user => new User(user))
+        })
+}
 
-
+export { fetchUsers, fetchCachedUsers }
