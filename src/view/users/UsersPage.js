@@ -72,7 +72,11 @@ class UsersPage extends React.Component {
         const filteredUsers = this.state.users.filter(user => user
             .getName()
             .includes(this.state.query.toLowerCase()))
-        console.log(filteredUsers);
+
+        const femaleSearch = filteredUsers.filter((element) => element.gender === 'female').length
+        const maleSearch = filteredUsers.filter((element) => element.gender === 'male').length
+
+        console.log(femaleSearch);
 
 
         if (filteredUsers.length === 0) {
@@ -81,6 +85,8 @@ class UsersPage extends React.Component {
                 <div className="row">
                     <Search onSearch={this.onSearch} />
                     <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} isGrid={this.state.isGrid} />
+
+
                 </div>
                 <NoMatch />
             </>
@@ -93,6 +99,7 @@ class UsersPage extends React.Component {
                 <div className="row">
                     <Search onSearch={this.onSearch} />
                     <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} isGrid={this.state.isGrid} />
+                    <p>{`Male: ${maleSearch} Female: ${femaleSearch}`}</p>
                 </div>
                 <Grid users={filteredUsers} />
             </>
@@ -102,6 +109,7 @@ class UsersPage extends React.Component {
             <div className="row">
                 <Search onSearch={this.onSearch} />
                 <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} isGrid={this.state.isGrid} />
+                <p>{`Male: ${maleSearch} Female: ${femaleSearch}`}</p>
 
             </div>
 
