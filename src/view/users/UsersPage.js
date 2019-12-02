@@ -4,6 +4,7 @@ import { fetchUsers } from '../../services/UserServices';
 import Grid from './Grid'
 import ActionButtons from './ActionButtons'
 import Search from './Search'
+import { LoadingScreen } from "./LoadingScreen"
 
 
 class UsersPage extends React.Component {
@@ -14,6 +15,7 @@ class UsersPage extends React.Component {
             isGrid: false,
             users: [],
             query: '',
+            isLoading: true
         };
     }
 
@@ -23,42 +25,57 @@ class UsersPage extends React.Component {
     }
 
     changeLayout = () => {
+        
         this.setState(prevState => {
-
-
             return {
 
                 isGrid: !prevState.isGrid
+
             }
         })
+
+        localStorage.setItem("isGrid", !this.state.isGrid);
+
     }
-
-
 
     componentDidMount() {
-        fetchUsers().then((users) => { this.setState({ users: users }) })
-    }
+
+        if (localStorage.getItem('isGrid')) {
+            let isGrid = JSON.parse(localStorage.getItem('isGrid'));
+            console.log(isGrid);
+            this.setState({
+                isGrid: isGrid
+            });
+        }
+        fetchUsers().then((users) => { this.setState({ isLoading: false, users: users }) });
+
+   
+}
 
     refresh = () => {
-        return (fetchUsers().then((users) => { this.setState({ users: users }) }))
+        this.setState({isLoading : true});
+        return (fetchUsers().then((users) => { this.setState( {isLoading: false, users: users }) }))
 
     }
 
 
 
-    render() {
+    render = () =>  {
+
         const filteredUsers = this.state.users.filter(user => user
             .getName()
             .includes(this.state.query.toLowerCase()))
+
+        if (this.state.isLoading) {
+            console.log("loading data");
+            return <LoadingScreen />
+        }
 
         if (this.state.isGrid) {
             return <>
                 <div className="row">
                     <Search onSearch={this.onSearch} />
-
                     <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} isGrid={this.state.isGrid} />
-
-
                 </div>
                 <Grid users={filteredUsers} />
             </>
@@ -67,17 +84,15 @@ class UsersPage extends React.Component {
         return <>
             <div className="row">
                 <Search onSearch={this.onSearch} />
-
                 <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} isGrid={this.state.isGrid} />
-
 
             </div>
 
             <UsersList users={filteredUsers} />
         </>
     }
-}
 
+}
 
 
 export default UsersPage;

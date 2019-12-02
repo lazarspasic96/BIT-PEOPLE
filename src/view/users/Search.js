@@ -10,7 +10,7 @@ const Search = (props) => {
             <div className="row">
                 <div className="input-field col s6">
                     <i className="material-icons prefix">search</i>
-                    <textarea class="materialize-textarea" onChange={event => props.onSearch(event.target.value)}></textarea>
+                    <textarea className="materialize-textarea" onChange={event => props.onSearch(event.target.value)}></textarea>
 
                 </div>
             </div>

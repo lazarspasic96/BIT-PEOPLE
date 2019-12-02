@@ -1,22 +1,29 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header';
+import AboutHeader from './components/AboutHeader';
 import Footer from './components/Footer';
 import Main from './Main';
-import { HashRouter } from "react-router-dom"
+import { Route } from "react-router-dom"
 
 
 
 class App extends React.Component {
 
   render() {
-    return <>
-      <Header />
-      <Main />
-      <Footer />
+    return (
 
-    </>
+      <>
+        <header>
+          <Route exact path="/" component={Header} />
+          <Route exact path="/about" component={AboutHeader} />
+        </header>
+        <Main />
+        <Footer />
+      </>
+    )
   }
+
 }
 
 
