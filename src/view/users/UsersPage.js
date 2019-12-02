@@ -5,6 +5,7 @@ import Grid from './Grid'
 import ActionButtons from './ActionButtons'
 import Search from './Search'
 import { LoadingScreen } from "./LoadingScreen"
+import NoMatch from './NoMatch';
 
 
 class UsersPage extends React.Component {
@@ -25,7 +26,7 @@ class UsersPage extends React.Component {
     }
 
     changeLayout = () => {
-        
+
         this.setState(prevState => {
             return {
 
@@ -49,27 +50,43 @@ class UsersPage extends React.Component {
         }
         fetchUsers().then((users) => { this.setState({ isLoading: false, users: users }) });
 
-   
-}
+
+    }
 
     refresh = () => {
-        this.setState({isLoading : true});
-        return (fetchUsers().then((users) => { this.setState( {isLoading: false, users: users }) }))
+        this.setState({ isLoading: true });
+        return (fetchUsers().then((users) => { this.setState({ isLoading: false, users: users }) }))
 
     }
 
 
 
-    render = () =>  {
+    render = () => {
 
-        const filteredUsers = this.state.users.filter(user => user
-            .getName()
-            .includes(this.state.query.toLowerCase()))
 
         if (this.state.isLoading) {
             console.log("loading data");
             return <LoadingScreen />
         }
+
+        const filteredUsers = this.state.users.filter(user => user
+            .getName()
+            .includes(this.state.query.toLowerCase()))
+        console.log(filteredUsers);
+
+
+        if (filteredUsers.length === 0) {
+
+            return <>
+                <div className="row">
+                    <Search onSearch={this.onSearch} />
+                    <ActionButtons changeLayout={this.changeLayout} refresh={this.refresh} isGrid={this.state.isGrid} />
+                </div>
+                <NoMatch />
+            </>
+        }
+
+
 
         if (this.state.isGrid) {
             return <>

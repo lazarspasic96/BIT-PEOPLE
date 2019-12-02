@@ -46,3 +46,10 @@ ul {
  .female {
   background-color: red;
 }
+
+
+.message {
+
+  text-align: center;
+    font-size: 2rem;
+}

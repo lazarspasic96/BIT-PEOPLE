@@ -8,7 +8,7 @@ const Grid = (props) => {
 
         <>
             <div className='row'>
-                {props.users.map(userFromArr => <UserCard user={userFromArr} />)}
+                {props.users.map(userFromArr => <UserCard key={userFromArr.id} user={userFromArr} />)}
 
             </div>
 
