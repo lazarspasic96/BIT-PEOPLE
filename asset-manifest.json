@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/BIT-PEOPLE/static/css/main.29e32608.chunk.css",
+    "main.js": "/BIT-PEOPLE/static/js/main.26acbabe.chunk.js",
+    "main.js.map": "/BIT-PEOPLE/static/js/main.26acbabe.chunk.js.map",
+    "runtime-main.js": "/BIT-PEOPLE/static/js/runtime-main.ffed5537.js",
+    "runtime-main.js.map": "/BIT-PEOPLE/static/js/runtime-main.ffed5537.js.map",
+    "static/js/2.3332ba9c.chunk.js": "/BIT-PEOPLE/static/js/2.3332ba9c.chunk.js",
+    "static/js/2.3332ba9c.chunk.js.map": "/BIT-PEOPLE/static/js/2.3332ba9c.chunk.js.map",
+    "index.html": "/BIT-PEOPLE/index.html",
+    "precache-manifest.e22c31f18bd3d3787ae94359b43e8363.js": "/BIT-PEOPLE/precache-manifest.e22c31f18bd3d3787ae94359b43e8363.js",
+    "service-worker.js": "/BIT-PEOPLE/service-worker.js",
+    "static/css/main.29e32608.chunk.css.map": "/BIT-PEOPLE/static/css/main.29e32608.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ffed5537.js",
+    "static/js/2.3332ba9c.chunk.js",
+    "static/css/main.29e32608.chunk.css",
+    "static/js/main.26acbabe.chunk.js"
+  ]
+}
